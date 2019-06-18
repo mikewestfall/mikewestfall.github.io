@@ -9,6 +9,10 @@
 
 <section class="alt">
 
-  Hi! **Markdown worked!** ~Yaaay!~
+  Hi!
+
+  Did **Markdown** work?
+
+  ~Guess we’ll find out!~
 
 </section>
