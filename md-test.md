@@ -1,18 +1,20 @@
 <style>
 .alt {
-  background: lightseagreen;
+  background-color: lightseagreen;
 }
 .alt p {
-  background: seashell;
+  background-color: seashell;
 }
 </style>
 
 <section class="alt">
+
 
   Hi!
 
   Did **Markdown** work?
 
   ~Guess we’ll find out!~
+
 
 </section>
