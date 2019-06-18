@@ -7,17 +7,13 @@
 }
 </style>
 
-<section class="alt">
-
-
+<section markdown="1" class="alt">
 
   Hi!
 
   Did **Markdown** work?
 
   ~Guess we’ll find out!~
-
-
 
 </section>
 
