@@ -1,6 +1,7 @@
 <style>
 .alt {
   background-color: lightseagreen;
+  padding: 1em;
 }
 .alt p {
   background-color: seashell;
