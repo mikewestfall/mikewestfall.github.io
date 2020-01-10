@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+
+<style id="webmakerstyle">
+/* Use Inter font, with system fonts as backup */
+@import url("https://rsms.me/inter/inter.css");
+html {
+	font-family: "Inter", sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+@supports (font-variation-settings: normal) {
+	html {
+		font-family: "Inter var", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	}
+}
+
+/* Box sizing reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Custom properties & theming */
+:root {
+	
+	/* Themes: Light & Dark Modes */
+	--mode: 'light';
+	--sun-emoji: '☀️';
+	--moon-emoji: '🌙';
+	--pdf-emoji: '📄';
+	
+	/* Colors */
+	--light-color: white;
+	--dark-color: black;
+	--light-alpha: rgba(255,255,255,.5);
+	--dark-alpha: rgba(0,0,0,.5);
+	--light-bg: var(--light-color);
+	--dark-bg: #00171c;
+	--light-link: blue;
+	--dark-link: aqua;
+		/* IT’S DANGEROUS TO GO  ▲
+				 ALONE! TAKE THIS.  ▲ ▲ */
+	
+	--primary-color: tomato;
+	--primary-accent: #fa2600; /* red orange */
+	--secondary-color: lightseagreen;
+	--secondary-accent: #14716c; /* darker teal */
+
+	/* Light Mode */
+	--bg-color: var(--light-bg);
+	--text-color: var(--dark-color);
+	--alpha-color: var(--dark-alpha);
+	--link-color: var(--light-link);
+	--switch-bg: var(--dark-bg);
+	--switch-text: var(--light-color);
+	--switch-icon: var(--moon-emoji);
+	
+	/* Font Sizes */
+	--text-xxl: 2.5rem;
+	--text-xl: 1.5rem;
+	--text-l: 1.25rem;
+	--text-m: 1rem;
+	--text-s: .875rem;
+	--text-xs: .75rem;
+	--text-xxs: .625rem;
+	
+	/* Font Weights */
+	--text-black: 900;
+	--text-xbold: 800;
+	--text-bold: 700;
+	--text-semibold: 600;
+	--text-medium: 500;
+	--text-regular: 400;
+	--text-light: 300;
+	--text-xlight: 200;
+	--text-thin: 100;
+}
+
+/* Set core body defaults */
+body {
+	background: var(--bg-color);
+	color: var(--text-color);	
+	font-size: 1em;
+	min-height: 100vh;
+	scroll-behavior: smooth;
+	text-rendering: optimizeSpeed;
+	line-height: 1.5;
+}
+
+/* Remove default margin */
+body,
+button,
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+li,
+figure {
+	margin: 0;
+}
+
+/* Set Flexbox and Grid displays */
+.flex {
+	display: flex;
+	flex-wrap: wrap;
+}
+.grid {
+	display: grid;
+}
+
+/* Align resume to center */
+.wrapper {
+	align-items: space-evenly;
+	flex-direction: column;
+	margin: auto;
+	max-width: 62.5em;
+}
+
+/* Set padding */
+.wrapper,
+section,
+.button {
+	padding: 1rem;
+}
+
+/* Set responsive grid */
+.resume {
+	grid-template-columns: 1fr;
+	grid-template-areas:
+		"logo"
+		"name"
+		"summary"
+		"contact"
+		"skills"
+		"experience"
+		"education";
+}
+@media (min-width: 400px) {
+	.resume {
+		grid-template-columns: minmax(max-content, 1fr) 2fr;
+		grid-template-areas:
+			"logo name"
+			"summary summary"
+			"toggle toggle"
+			"contact contact"
+			"skills skills"
+			"experience experience"
+			"education education";
+	}
+}
+@media (min-width: 800px) {
+	.resume {
+		grid-template-areas:
+			"logo name"
+			"logo summary"
+			"toggle toggle"
+			"contact experience"
+			"skills experience"
+			"skills education";
+		grid-template-rows: auto auto auto auto auto 1fr;
+	}
+}
+
+/* Define grid areas */
+.logo {
+	grid-area: logo;
+}
+.name {
+	grid-area: name;
+}
+.summary {
+	grid-area: summary;
+}
+.contact {
+	grid-area: contact;
+}
+.skills {
+	grid-area: skills;
+}
+.experience {
+	grid-area: experience;
+}
+.education {
+	grid-area: education;
+}
+
+/* Text styles */
+h1 {
+	font-size: var(--text-xxl);
+	font-weight: var(--text-black);
+	line-height: 1;
+}
+h2 {
+	border-bottom: .25rem solid var(--primary-accent);
+	font-size: var(--text-xl);
+	font-weight: var(--text-xbold);
+	padding-bottom: .25rem;
+}
+h3,
+.level-3 > * {
+	font-size: var(--text-l);
+	font-weight: var(--text-bold);
+}
+h4,
+.level-4 > *,
+p,
+li {
+	font-size: var(--text-m);
+}
+h4,
+.level-4 {
+	font-weight: var(--text-semibold);
+}
+.level-4 p {
+	font-style: italic;
+}
+
+/* Really Skinny Screens */
+@media (max-width: 399px) {
+	.grid {
+		display: block;
+	}
+}
+@media (max-width: 300px) {
+	:root {
+		font-size: var(--text-xs);
+	}
+	ul {
+		list-style-position: inside;
+		padding: 0;
+	}
+}
+
+/* Natural flow and rhythm in articles by default */
+.wrapper > * + *,
+section > * + * {
+	margin-top: 1em;
+}
+.row > * {
+	margin: .5em;
+}
+
+/* Header spacing */
+.timeline {
+	grid-template-columns: auto auto;
+	justify-content: space-between;
+}
+
+/* SVG logos & icons */
+figure {
+	text-align: center;
+}
+svg {
+	max-width: 100%;
+}
+.initial.m {
+	fill: var(--primary-color);
+}
+.initial.m.r {
+	fill: var(--primary-accent);
+}
+.initial.w {
+	fill: var(--secondary-color);
+}
+.initial.w.r {
+	fill: var(--secondary-accent);
+}
+.icon {
+	fill: var(--text-color);
+	margin-right: .25em;
+}
+.button .icon {
+	fill: var(--switch-text);
+}
+
+/* Contact info list */
+.contact-info {
+	list-style-type: none;
+	padding: 0;
+}
+
+/* Keep long URL link on one line */
+.url {
+	white-space: nowrap;
+}
+
+/* Toggle light/dark mode */
+
+.no-js .toggle { /* Hide from users with JS disabled */
+  display: none;
+}
+.button {
+	background-color: var(--switch-bg);
+	border: .25rem solid var(--bg-color);
+	border-radius: 999em;
+	color: var(--switch-text);
+	cursor: pointer;
+	line-height: 1.25rem;
+}
+.button-text:after {
+	content: var(--switch-icon);
+	fill: yellow;
+	height: 1rem;
+	line-height: 1;
+	margin-left: .5rem;
+	vertical-align: middle;
+}
+.mode:after {
+	color: transparent;
+	text-shadow: 0 0 goldenrod;
+}
+.button:hover,
+.button:active {
+	box-shadow: 0 0 0 .375rem var(--secondary-color);
+}
+.button:active {
+	background-color: var(--secondary-accent);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-mode: "dark";
+  }
+  
+  :root:not([data-user-color-scheme]) {
+		--text-color: var(--light-color);
+		--bg-color: var(--dark-bg);
+		--alpha-color: var(--light-alpha);
+		--link-color: var(--dark-link);
+		--switch-bg: var(--light-bg);
+		--switch-text: var(--dark-color);
+		--switch-icon: var(--sun-emoji);
+  }
+}
+
+[data-user-color-scheme="dark"] {
+	--text-color: var(--light-color);
+	--bg-color: var(--dark-bg);
+	--alpha-color: var(--light-alpha);
+	--link-color: var(--dark-link);
+	--switch-bg: var(--light-bg);
+	--switch-text: var(--dark-color);
+	--switch-icon: var(--sun-emoji);
+}
+/* PDF icon */
+.pdf-link {
+	--switch-icon: var(--pdf-emoji);
+}
+
+/* Set link colors */
+a {
+  color: var(--link-color);
+}
+a:hover {
+  color: var(--secondary-color);
+}
+a:active {
+  color: var(--secondary-accent);
+}
+
+/* Link styling */
+.button,
+.contact a {
+	text-decoration: none;
+}
+.icon + span {
+	text-decoration: underline;
+	text-decoration-skip-ink: auto;
+}
+
+/* Mark visually hidden content */
+.visually-hidden { 
+  display: block;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(1px);
+  white-space: nowrap;
+  position: absolute;
+}
+</style>
+</head>
+<body>
+<!DOCTYPE html>
+<html class="no-js">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Mike Westfall’s Resume: Digital Producer for Hire</title>
+		<link rel="stylesheet" href="styles/style.css" />
+	</head>
+	<body>
+		<main class="flex wrapper">
+			<!-- Toggle Buttons -->
+			<header class="flex row">
+				<div class="toggle">
+					<div role="status" class="visually-hidden js-mode-status"></div>
+					<button class="level-4 js-mode-toggle button">
+						<span class="button-text mode js-mode-toggle-text">Turn on dark mode</span>
+					</button>
+				</div>
+				<a class="level-4 button pdf-link" href="#">
+					<span class="button-text">Download PDF copy</span>
+				</a>
+			</header>
+			
+			<article class="grid resume">
+				
+				<!-- Logo -->
+				<section class="logo">
+					<figure>
+						<svg aria-hidden="true"
+								 role="img"
+								 viewBox="0 0 21 9">
+							<title>MW</title>
+							<polygon class="initial m l"
+											 fill="tomato"
+											 points="0,9 4.5,0 9,9 6,9 4.5,6 3,9"/>
+							<polygon class="initial m r"
+											 fill="#fa2600"
+											 points="3.5,9 8,0 12.5,9 9.5,9 8,6 6.5,9"/>
+							<polygon class="initial w l"
+											 fill="lightseagreen"
+											 points="8.5,0 13,9 17.5,0 14.5,0 13,3 11.5,0"/>
+							<polygon class="initial w r"
+											 fill="#14716c"
+											 points="12,0 16.5,9 21,0 18,0 16.5,3 15,0"/>
+						</svg>
+					</figure>
+				</section>
+
+				<!-- Name -->
+				<section class="name">
+					<h1>Mike Westfall</h1>
+				</section>
+				
+				<!-- Summary -->
+				<section class="summary">
+					<p class="summary-p">Experienced Digital Producer, Writer, and Editor specializing in customer-focused web design,	content strategy, and CMS publishing and migration.</p>
+				</section>
+				
+				<!-- Contact -->
+				<section class="contact">
+					<h2>Contact</h2>
+					
+					<ul class="contact-info">
+						<li>
+							<a href="mailto:fallwestmike@gmail.com">
+								<svg class="icon"
+										 role="img"
+										 viewBox="0 0 8 6"
+										 width="1em"
+										 xmlns="http://www.w3.org/2000/svg">
+									<title>Email</title>
+									<path d="m0 0h8v6h-8zm.75 .75v4.5h6.5v-4.5zM0 0l4 3 4-3v1l-4 3-4-3z"/>
+								</svg>
+								<span>fallwestmike@gmail.com</span></a>
+						</li>
+						<li>
+							<a class="url" href="//linkedin.com/in/mikewestfall">
+								<svg aria-hidden="true"
+										 class="icon"
+										 role="img"
+										 viewBox="0 0 100 100"
+										 width="1em"
+										 xmlns="http://www.w3.org/2000/svg">
+									<title>Connect with me on LinkedIn</title>
+									<path d="M0,0V100H100V0ZM29.6,85.2H14.8V37.5H29.6ZM22.2,31a8.6,8.6,0,1,1,8.6-8.6A8.6,8.6,0,0,1,22.2,31Zm63,54.2H70.4V62c0-5.5-.1-12.7-7.7-12.7s-8.9,6-8.9,12.3V85.2H39V37.5H53.2V44h.2c2-3.8,6.8-7.7,14-7.7,15,0,17.8,9.9,17.8,22.7Z"/>
+								</svg>
+								<span>linkedin.com/in/mikewestfall</span></a></li>
+					</ul>
+
+				</section>
+
+				<!-- Skills -->
+				<section class="skills">
+					<h2>Skills</h2>
+					
+					<h3>CMS Publishing</h3>
+					<ul class="skillset">
+						<li>Adobe Experience Manager</li>
+						<li>Drupal</li>
+						<li>WordPress</li>
+					</ul>
+					
+					<h3>Adobe Creative Suite</h3>
+					<ul class="skillset">
+						<li>Photoshop</li>
+						<li>Illustrator</li>
+						<li>Dreamweaver</li>
+					</ul>
+					
+					<h3>Front-End Development</h3>
+					<ul class="skillset">
+						<li>HTML</li>
+						<li>CSS</li>
+						<li>Responsive Design</li>
+					</ul>
+					
+					<h4>Basic experience with</h4>
+					<ul class="skillset">
+						<li>JavaScript</li>
+						<li>jQuery</li>
+						<li>PHP</li>
+						<li>SVG Coding</li>
+					</ul>
+					
+					<h3>Analytics</h3>
+					<ul class="skillset">
+						<li>Adobe Analytics (Omniture)</li>
+						<li>Adobe Target</li>
+						<li>Facebook Insights</li>
+						<li>SiteImprove</li>
+						<li>Social News Desk</li>
+						<li>Project Management</li>
+						<li>JIRA</li>
+						<li>Aha</li>
+					</ul>
+				</section>
+
+				<!-- Experience -->
+				<section class="experience">
+					<h2>Experience</h2>
+					
+					<header class="level-3 grid timeline">
+						<h3>Charter Communications</h3>
+						<p>Orlando, FL</p>
+					</header>
+					
+					<header class="level-4 grid timeline">
+						<h4>Support Content Publisher</h4>
+						<p>2018 – 2019</p>
+						<h4>Associate Support Content Publisher</h4>
+						<p>2017 – 2018</p>
+						<h4>Online Content Coordinator</h4>
+						<p>2015 – 2017</p>
+					</header>
+					
+					<ul>
+						<li>Developed, edited, and published online customer support articles and promotional content with a special focus on personalized and targeted content, responsive design, and SEO strategy.</li>
+						<li>Consolidated support content from 6 legacy customer portals to more than 250 new articles and 1,000 equipment devices on a single CMS during Charter’s acquisition of Bright House Networks and Time Warner Cable.</li>
+						<li>Increased page views by 44% over 6 months in 2017 by improving SEO sitewide.</li>
+						<li>Developed and launched expanded online customer support portal for Bright House Networks Business Solutions in 2016.</li>
+					</ul>
+					
+					<header class="level-3 grid timeline">
+						<h3>News 13</h3>
+						<p>Orlando, FL</p>
+					</header>
+						
+					<header class="level-4 grid timeline">
+						<h4>Senior Digital Media Producer</h4>
+						<p>2012 – 2015</p>
+						<h4>Web Content Editor</h4>
+						<p>2007 – 2012</p>
+					</header>
+					
+					<ul>
+						<li>Led a team in creating and publishing interactive web and social media content for News 13 and partner channels Bay News 9 and Bright House Sports Network.</li>
+						<li>Increased unique visitor traffic to News 13’s website by 98% over 3 years by implementing new content and social media strategies.</li>
+						<li>Won the Edward R. Murrow award for best website in a large television market in 2015.</li>
+						<li>Consolidated content from 3 partner websites to a single CMS in 2010, and to a new CMS platform in 2012.</li>
+						<li>Designed and published Bright House Sports Network’s online presence in 2008.</li>
+					</ul>
+
+				</section>
+
+				<!-- Education -->
+				<section class="education">
+					<h2>Education</h2>
+					
+					<header class="level-3 grid timeline">
+						<h3>University of Scranton</h3>
+						<p>Scranton, PA</p>
+					</header>
+					<p class="grid timeline">
+						<span>B.A. in Communication</span>
+						<i class="level-4">2003</i></p>
+				</section>
+				
+			</article>
+		</main>
+	</body>
+</html>
+
+<script>
+/* Dark/Light Mode Toggle Button JS
+forked from a project by Andy Bell (hankchizljaw.com)
+//codepen.io/andybelldesign/pen/VOELMZ
+*/
+
+// Remove the no JS class so that the button will show
+document.documentElement.classList.remove('no-js');
+
+const STORAGE_KEY = 'user-color-scheme';
+const COLOR_MODE_KEY = '--mode';
+
+const modeToggleButton = document.querySelector('.js-mode-toggle');
+const modeToggleText = document.querySelector('.js-mode-toggle-text');
+const modeStatusElement = document.querySelector('.js-mode-status');
+
+/**
+ * Pass in a custom prop key and this function will return its
+ * computed value. 
+ * A reduced version of this: https://andy-bell.design/wrote/get-css-custom-property-value-with-javascript/
+ */
+const getCSSCustomProp = (propKey) => {
+  let response = getComputedStyle(document.documentElement).getPropertyValue(propKey);
+
+  // Tidy up the string if there’s something to work with
+  if (response.length) {
+    response = response.replace(/\'|"/g, '').trim();
+  }
+
+  // Return the string response by default
+  return response;
+};
+
+/**
+ * Takes either a passed settings ('light'|'dark') or grabs that from localStorage.
+ * If it can’t find the setting in either, it tries to load the CSS color mode,
+ * controlled by the media query
+ */
+const applySetting = passedSetting => {
+  let currentSetting = passedSetting || localStorage.getItem(STORAGE_KEY);
+  
+  if(currentSetting) {
+    document.documentElement.setAttribute('data-user-color-scheme', currentSetting);
+    setButtonLabelAndStatus(currentSetting);
+  }
+  else {
+    setButtonLabelAndStatus(getCSSCustomProp(COLOR_MODE_KEY));
+  }
+}
+
+/**
+ * Get’s the current setting > reverses it > stores it
+ */
+const toggleSetting = () => {
+  let currentSetting = localStorage.getItem(STORAGE_KEY);
+  
+  switch(currentSetting) {
+    case null:
+      currentSetting = getCSSCustomProp(COLOR_MODE_KEY) === 'dark' ? 'light' : 'dark';
+      break;
+    case 'light':
+      currentSetting = 'dark';
+      break;
+    case 'dark':
+      currentSetting = 'light';
+      break;
+  }
+
+
+  localStorage.setItem(STORAGE_KEY, currentSetting);
+  
+  return currentSetting;
+}
+
+/**
+ * A shared method for setting the button text label and visually hidden status element 
+ */
+const setButtonLabelAndStatus = currentSetting => { 
+  modeToggleText.innerText = `Enable ${currentSetting === 'dark' ? 'light' : 'dark'} mode`;
+  modeStatusElement.innerText = `Color mode is now “${currentSetting}.”`;
+}
+
+/**
+ * Clicking the button runs the apply setting method which grabs its parameter
+ * from the toggle setting method.
+ */
+modeToggleButton.addEventListener('click', evt => {
+  evt.preventDefault();
+  
+  applySetting(toggleSetting());
+});
+
+applySetting();
+//# sourceURL=userscript.js
+</script>
+</body>
+</html>
