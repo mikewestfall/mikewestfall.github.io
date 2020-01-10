@@ -392,7 +392,7 @@ a:active {
 <html class="no-js">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>Mike Westfall’s Resume: Digital Producer for Hire</title>
 		<link rel="stylesheet" href="styles/style.css" />
 	</head>
@@ -406,7 +406,9 @@ a:active {
 						<span class="button-text mode js-mode-toggle-text">Turn on dark mode</span>
 					</button>
 				</div>
-				<a class="level-4 button pdf-link" href="#">
+				<a class="level-4 button pdf-link"
+					 href="//mikewestfall.github.io/resume/westfall-resume-2020.pdf"
+					 target="_blank">
 					<span class="button-text">Download PDF copy</span>
 				</a>
 			</header>
@@ -599,7 +601,7 @@ forked from a project by Andy Bell (hankchizljaw.com)
 // Remove the no JS class so that the button will show
 document.documentElement.classList.remove('no-js');
 
-const STORAGE_KEY = 'user-color-scheme';
+//const STORAGE_KEY = 'user-color-scheme';
 const COLOR_MODE_KEY = '--mode';
 
 const modeToggleButton = document.querySelector('.js-mode-toggle');
@@ -668,7 +670,7 @@ const toggleSetting = () => {
  * A shared method for setting the button text label and visually hidden status element 
  */
 const setButtonLabelAndStatus = currentSetting => { 
-  modeToggleText.innerText = `Enable ${currentSetting === 'dark' ? 'light' : 'dark'} mode`;
+  modeToggleText.innerText = `Turn on ${currentSetting === 'dark' ? 'light' : 'dark'} mode`;
   modeStatusElement.innerText = `Color mode is now “${currentSetting}.”`;
 }
 
